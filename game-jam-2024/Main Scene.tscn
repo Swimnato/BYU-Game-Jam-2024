@@ -1,20 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://brny0obmr4vdt"]
+[gd_scene load_steps=9 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://Space Background Dev Art.png" id="1_ighvd"]
 [ext_resource type="Texture2D" uid="uid://iqno4701px8i" path="res://Planet Dev Art.png" id="2_47bj2"]
+[ext_resource type="Script" path="res://main_scene.gd" id="2_m2wn8"]
 [ext_resource type="Texture2D" uid="uid://krt7327yq0br" path="res://Main Ship Dev Art.png" id="3_5xwg7"]
+[ext_resource type="Script" path="res://planet_dev_art.gd" id="3_ne5qb"]
 [ext_resource type="Texture2D" uid="uid://cevdhb566aodp" path="res://Drone Ship Dev Art.png" id="4_j0825"]
 [ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://Asteroid Dev Art.png" id="5_5r03b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
 [node name="SpaceBackgroundDevArt" type="Sprite2D"]
 position = Vector2(1153, 648)
 rotation = 0.0030698
 texture = ExtResource("1_ighvd")
+script = ExtResource("2_m2wn8")
 
 [node name="PlanetDevArt" type="Sprite2D" parent="."]
-position = Vector2(0.00305176, 1)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_47bj2")
+script = ExtResource("3_ne5qb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDevArt"]
+rotation = -0.3312
+scale = Vector2(30, 30)
+shape = SubResource("CircleShape2D_lqryg")
 
 [node name="MainShipDevArt" type="Sprite2D" parent="."]
 position = Vector2(-170.307, -185.894)
@@ -29,5 +39,8 @@ texture = ExtResource("4_j0825")
 
 [node name="AsteroidDevArt" type="Sprite2D" parent="."]
 position = Vector2(-748.801, -259.703)
+rotation = -0.000753172
 scale = Vector2(-0.23, -0.23)
 texture = ExtResource("5_5r03b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
