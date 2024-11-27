@@ -4,6 +4,8 @@ var nativeResolution = Vector2(1152, 648)
 var scaleForNativeResolution = Vector2(.5, .5)
 var currentResolution = Vector2(0,0)
 
+var lastUpdate = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fitWindow(nativeResolution)
@@ -12,6 +14,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	fitWindow(get_window().get_size())
+	var timeSinceLastUpdate = Time.get_ticks_msec() - lastUpdate
+	if timeSinceLastUpdate > 500:
+		lastUpdate = Time.get_ticks_msec()
 
 func fitWindow(newResolution):
 	if newResolution.x != currentResolution.x or newResolution.y != currentResolution.y:
@@ -24,5 +29,4 @@ func fitWindow(newResolution):
 			else:
 				x_zoom = y_zoom
 		var zoomage = Vector2(x_zoom, y_zoom)
-		print(newResolution)
 		$Camera2D.zoom = zoomage

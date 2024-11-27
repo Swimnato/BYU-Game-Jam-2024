@@ -11,8 +11,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var timeSinceLastUpdate = Time.get_ticks_msec() - lastUpdate
-	if timeSinceLastUpdate > 50:
-		theta += 1.0
+	if timeSinceLastUpdate > 5:
+		theta += .1 * (timeSinceLastUpdate / 5) # consistancy for all frameRates
 		position.x = sin(theta/180.0 * PI) * 300
 		position.y = -cos(theta/180.0 * PI) * 300
 		rotation_degrees = theta
