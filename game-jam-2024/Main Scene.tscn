@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://brny0obmr4vdt"]
+[gd_scene load_steps=10 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://Space Background Dev Art.png" id="1_ighvd"]
 [ext_resource type="Texture2D" uid="uid://iqno4701px8i" path="res://Planet Dev Art.png" id="2_47bj2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://planet_dev_art.gd" id="3_ne5qb"]
 [ext_resource type="Texture2D" uid="uid://cevdhb566aodp" path="res://Drone Ship Dev Art.png" id="4_j0825"]
 [ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://Asteroid Dev Art.png" id="5_5r03b"]
+[ext_resource type="Script" path="res://main_ship_dev_art.gd" id="6_ybwfc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
@@ -31,6 +32,7 @@ position = Vector2(-170.307, -185.894)
 rotation = -0.655343
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_5xwg7")
+script = ExtResource("6_ybwfc")
 
 [node name="DroneShipDevArt" type="Sprite2D" parent="."]
 position = Vector2(202.827, -189.318)

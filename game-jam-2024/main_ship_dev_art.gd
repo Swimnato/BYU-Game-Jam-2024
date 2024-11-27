@@ -1,11 +1,19 @@
 extends Sprite2D
 
+var theta = 0.0;
+var lastUpdate = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	position.x = 0
+	position.y = -300
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var timeSinceLastUpdate = Time.get_ticks_msec() - lastUpdate
+	if timeSinceLastUpdate > 50:
+		theta += 1.0
+		position.x = sin(theta/180.0 * PI) * 300
+		position.y = -cos(theta/180.0 * PI) * 300
+		rotation_degrees = theta
+		lastUpdate = Time.get_ticks_msec()
