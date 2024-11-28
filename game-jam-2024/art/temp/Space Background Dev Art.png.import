@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cevdhb566aodp"
-path="res://.godot/imported/Drone Ship Dev Art.png-4fbe1d6d5ecaf27c2f0cffffecb40b1e.ctex"
+uid="uid://dqqpesl4dblg6"
+path="res://.godot/imported/Space Background Dev Art.png-ad7b6f5cf9d966edb4732c9a4dabc840.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Drone Ship Dev Art.png"
-dest_files=["res://.godot/imported/Drone Ship Dev Art.png-4fbe1d6d5ecaf27c2f0cffffecb40b1e.ctex"]
+source_file="res://art/temp/Space Background Dev Art.png"
+dest_files=["res://.godot/imported/Space Background Dev Art.png-ad7b6f5cf9d966edb4732c9a4dabc840.ctex"]
 
 [params]
 

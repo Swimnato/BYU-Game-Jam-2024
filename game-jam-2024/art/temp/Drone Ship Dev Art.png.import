@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6uc0fa4ryuis"
-path="res://.godot/imported/Asteroid Dev Art.png-04e1fc402c203bfa8a956ed4ba9f6c6c.ctex"
+uid="uid://cevdhb566aodp"
+path="res://.godot/imported/Drone Ship Dev Art.png-d63bec5f848f6ddb63316cd3af61080d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asteroid Dev Art.png"
-dest_files=["res://.godot/imported/Asteroid Dev Art.png-04e1fc402c203bfa8a956ed4ba9f6c6c.ctex"]
+source_file="res://art/temp/Drone Ship Dev Art.png"
+dest_files=["res://.godot/imported/Drone Ship Dev Art.png-d63bec5f848f6ddb63316cd3af61080d.ctex"]
 
 [params]
 
