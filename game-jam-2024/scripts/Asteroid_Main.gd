@@ -1,7 +1,7 @@
 extends Sprite2D
 
 
-const AsteroidMovement = preload("res://AsteroidMovement.gd");
+const AsteroidMovement = preload("res://scripts/AsteroidMovement.gd");
 var movement = AsteroidMovement.new();
 
 var lastUpdate = 0
