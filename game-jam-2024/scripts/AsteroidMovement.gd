@@ -1,5 +1,5 @@
 func updatePosition(currentPosition, timePassed):
-	var step = 1 * (timePassed/5);
+	var step = 1 * (timePassed/7.5);
 	var theta = atan(abs(currentPosition.x)/abs(currentPosition.y));
 	var newPosition = currentPosition;
 	if(currentPosition.x < 0):

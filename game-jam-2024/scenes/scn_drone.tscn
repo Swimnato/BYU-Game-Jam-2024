@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxa6ntrn7ua1s"]
+[gd_scene load_steps=3 format=3 uid="uid://d3thy6csnhwc2"]
 
 [ext_resource type="Script" path="res://scripts/scr_drone.gd" id="1_3dp6e"]
 [ext_resource type="Texture2D" uid="uid://cevdhb566aodp" path="res://art/temp/Drone Ship Dev Art.png" id="1_c3u66"]

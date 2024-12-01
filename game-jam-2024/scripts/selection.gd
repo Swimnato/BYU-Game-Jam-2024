@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if isMouseDown:
 		endPos = convertToRelativeCoordinates(get_global_mouse_position());
-		print(endPos)
 	if endPos != startPos:
 		var size = (startPos - endPos)
 		draw_rect(Rect2(endPos, size), Color.SKY_BLUE, false, 10)
