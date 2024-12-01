@@ -14,8 +14,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
 [node name="SpaceBackgroundDevArt" type="Sprite2D"]
-position = Vector2(1008, 729)
-rotation = 0.0030698
+position = Vector2(1134, 654)
 texture = ExtResource("1_1jorf")
 script = ExtResource("2_36ttu")
 
@@ -46,7 +45,7 @@ script = ExtResource("9_bklsd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Selection" type="Polygon2D" parent="."]
+[node name="Selection" type="Node2D" parent="."]
 script = ExtResource("10_yx8jt")
 
 [node name="droneController" type="Node2D" parent="."]
