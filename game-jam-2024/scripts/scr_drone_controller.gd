@@ -1,6 +1,6 @@
 extends Node2D
 
-var drones: Array[PackedScene]
+var drones: Array
 @export var starting_drone_count = 5
 @onready var scn_drone = preload("res://scenes/scn_drone.tscn")
 @onready var scene_background = $".."
@@ -21,11 +21,9 @@ func _process(delta: float) -> void:
 	
 func create_drone() -> void:
 	var drone = scn_drone.instantiate()
-	drone.position = orbit_position(rng.randf() * 360, lower_orbit_radius)#scene_background.nativeResolution / 2
+	var angle = rng.randf() * 360
+	drone.position = drone.orbit_position(angle, lower_orbit_radius)#scene_background.nativeResolution / 2
+	drone.orbit_angle = angle
 	drones.append(drone)
 	add_child(drone)
 	
-func orbit_position(theta: float, radius: float) -> Vector2:
-	var x = sin(theta/180.0 * PI) * radius
-	var y = -cos(theta/180.0 * PI) * radius
-	return Vector2(x, y)

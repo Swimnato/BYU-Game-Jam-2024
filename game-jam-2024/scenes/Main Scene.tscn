@@ -50,3 +50,4 @@ script = ExtResource("10_yx8jt")
 
 [node name="droneController" type="Node2D" parent="."]
 script = ExtResource("11_dnc7g")
+starting_drone_count = 10
