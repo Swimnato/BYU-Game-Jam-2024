@@ -1,17 +1,81 @@
-[gd_scene load_steps=12 format=3 uid="uid://brny0obmr4vdt"]
+[gd_scene load_steps=17 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://art/temp/Space Background Dev Art.png" id="1_1jorf"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="2_36ttu"]
-[ext_resource type="Texture2D" uid="uid://iqno4701px8i" path="res://art/temp/Planet Dev Art.png" id="3_ggrqu"]
+[ext_resource type="Texture2D" uid="uid://cjg02v7vh47o0" path="res://art/planet_healthy_1.png" id="4_2e7jh"]
 [ext_resource type="Script" path="res://scripts/planet_dev_art.gd" id="4_50ck8"]
 [ext_resource type="Texture2D" uid="uid://krt7327yq0br" path="res://art/temp/Main Ship Dev Art.png" id="5_i8m0v"]
+[ext_resource type="Texture2D" uid="uid://b0g3mdejj4gjk" path="res://art/planet_healthy_2.png" id="5_sa5fh"]
 [ext_resource type="Script" path="res://scripts/main_ship_dev_art.gd" id="6_bitnt"]
+[ext_resource type="Texture2D" uid="uid://ci38m0jw5og8g" path="res://art/planet_healthy_3.png" id="6_cqacq"]
 [ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://art/temp/Asteroid Dev Art.png" id="8_gwdi6"]
 [ext_resource type="Script" path="res://scripts/Asteroid_Main.gd" id="9_bklsd"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
+
+[sub_resource type="Animation" id="Animation_6ljlr"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_2e7jh"), ExtResource("5_sa5fh"), ExtResource("6_cqacq"), ExtResource("5_sa5fh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.566667, 0.866667, 1.16667, 1.4, 1.7, 1.86667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3, 0), Vector2(2.481, 3), Vector2(1.96172, 2.37209), Vector2(-3, 1.744), Vector2(-2.16, 0), Vector2(-3, -3), Vector2(0, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p0i1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_2e7jh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3emyr"]
+_data = {
+"RESET": SubResource("Animation_p0i1i"),
+"idle": SubResource("Animation_6ljlr")
+}
 
 [node name="SpaceBackgroundDevArt" type="Sprite2D"]
 position = Vector2(1134, 654)
@@ -21,13 +85,24 @@ script = ExtResource("2_36ttu")
 [node name="PlanetDevArt" type="Sprite2D" parent="."]
 rotation = -0.00349066
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_ggrqu")
 script = ExtResource("4_50ck8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDevArt"]
-rotation = -6.28319
-scale = Vector2(30, 30)
+[node name="Area2D" type="Area2D" parent="PlanetDevArt"]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDevArt/Area2D"]
+position = Vector2(0, 50)
+scale = Vector2(25, 25)
 shape = SubResource("CircleShape2D_lqryg")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlanetDevArt"]
+texture = ExtResource("4_2e7jh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlanetDevArt"]
+libraries = {
+"": SubResource("AnimationLibrary_3emyr")
+}
+speed_scale = 5.0
 
 [node name="MainShipDevArt" type="Sprite2D" parent="."]
 position = Vector2(-170.307, -185.894)
