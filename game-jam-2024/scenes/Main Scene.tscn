@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://scripts/planet_dev_art.gd" id="4_50ck8"]
 [ext_resource type="Texture2D" uid="uid://krt7327yq0br" path="res://art/temp/Main Ship Dev Art.png" id="5_i8m0v"]
 [ext_resource type="Script" path="res://scripts/main_ship_dev_art.gd" id="6_bitnt"]
-[ext_resource type="Texture2D" uid="uid://cevdhb566aodp" path="res://art/temp/Drone Ship Dev Art.png" id="7_h2s7y"]
 [ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://art/temp/Asteroid Dev Art.png" id="8_gwdi6"]
 [ext_resource type="Script" path="res://scripts/Asteroid_Main.gd" id="9_bklsd"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
+[ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
@@ -36,11 +36,6 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_i8m0v")
 script = ExtResource("6_bitnt")
 
-[node name="DroneShipDevArt" type="Sprite2D" parent="."]
-position = Vector2(202.827, -189.318)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("7_h2s7y")
-
 [node name="Asteroid" type="Sprite2D" parent="."]
 position = Vector2(-748.801, -259.703)
 rotation = -0.000753172
@@ -52,3 +47,6 @@ script = ExtResource("9_bklsd")
 
 [node name="Selection" type="Node2D" parent="."]
 script = ExtResource("10_yx8jt")
+
+[node name="droneController" type="Node2D" parent="."]
+script = ExtResource("11_dnc7g")
