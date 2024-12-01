@@ -19,10 +19,10 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	var centerOfBar = barPosition - size / 2
-	draw_rect(Rect2(centerOfBar, size), outColor, true, 1);
+	draw_rect(Rect2(centerOfBar, size), outColor, true);
 	var currentHealthSize: Vector2 = Vector2(1.0 * currentHealth/maxHealth * size.x, size.y);
 	if(currentHealth > 0):
-		draw_rect(Rect2(centerOfBar, currentHealthSize), healthColor, true, 1);
+		draw_rect(Rect2(centerOfBar, currentHealthSize), healthColor, true);
 
 func setCoords(newCenter: Vector2):
 	barPosition = newCenter;

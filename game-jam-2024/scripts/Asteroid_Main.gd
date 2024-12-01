@@ -13,14 +13,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var timeSinceLastUpdate = Time.get_ticks_msec() - lastUpdate
-	if timeSinceLastUpdate > 5:
-		lastUpdate = Time.get_ticks_msec()
+	lastUpdate = Time.get_ticks_msec()
 
-		set_position(movement.updatePosition(position,timeSinceLastUpdate));
+	set_position(movement.updatePosition(position, delta * 1000));
 
-		if position.x == position.y and position.y == 0:
-			get_parent().remove_child(self)
+	if position.x == position.y and position.y == 0:
+		get_parent().remove_child(self)
 
 func setPosition(newPos):
 	set_position(newPos)

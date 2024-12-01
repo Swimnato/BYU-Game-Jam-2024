@@ -128,4 +128,4 @@ script = ExtResource("10_yx8jt")
 script = ExtResource("11_dnc7g")
 
 [node name="StatusBars" parent="." instance=ExtResource("11_o44ox")]
-currentHealth = 60
+currentHealth = 66
