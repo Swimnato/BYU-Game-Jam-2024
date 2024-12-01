@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/Asteroid_Main.gd" id="9_bklsd"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
-[ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/health_bars.tscn" id="11_o44ox"]
+[ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="11_o44ox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
@@ -52,6 +52,6 @@ script = ExtResource("10_yx8jt")
 [node name="droneController" type="Node2D" parent="."]
 script = ExtResource("11_dnc7g")
 
-[node name="HealthBars" parent="." instance=ExtResource("11_o44ox")]
+[node name="StatusBars" parent="." instance=ExtResource("11_o44ox")]
 position = Vector2(-261, 39)
-currentHealth = 75
+currentHealth = 60
