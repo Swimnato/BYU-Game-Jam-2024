@@ -10,7 +10,12 @@ var current_state = states.ORBIT_LOWER
 @export var orbit_speed = 1
 @export var attack_speed = 5
 
+@export var selectionBoxSize = Vector2(60,40);
+@export var selecitonBoxColor = Color.AQUA;
+
 var orbit_angle = 0
+var selected = false;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +23,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	queue_redraw();
 	match current_state:
 		states.ORBIT_LOWER:
 			move_orbit(lower_orbit_radius, delta)
@@ -32,3 +38,7 @@ func orbit_position(theta: float, radius: float) -> Vector2:
 	var x =  sin(deg_to_rad(theta)) * radius
 	var y = -cos(deg_to_rad(theta)) * radius
 	return Vector2(x, y)
+
+func _draw() -> void:
+	if selected:
+		draw_rect(Rect2(-selectionBoxSize / 2.0, selectionBoxSize), selecitonBoxColor, true);
