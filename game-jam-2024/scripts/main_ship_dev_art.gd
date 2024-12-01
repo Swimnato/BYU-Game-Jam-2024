@@ -16,4 +16,6 @@ func _process(delta: float) -> void:
 		position.x = sin(theta/180.0 * PI) * 300
 		position.y = -cos(theta/180.0 * PI) * 300
 		rotation_degrees = theta
+		if(theta >= 360):
+			theta -= 360;
 		lastUpdate = Time.get_ticks_msec()
