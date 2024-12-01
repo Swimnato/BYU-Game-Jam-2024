@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var centerOfBar = Vector2(0,0);
+@export var barPosition = Vector2(0,0);
 @export var size = Vector2(50,10);
 @export var healthColor = Color.GREEN;
 @export var outColor = Color.DARK_SLATE_GRAY;
@@ -10,22 +10,22 @@ extends Node2D
 func _ready() -> void:
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(currentHealth > maxHealth):
 		currentHealth = maxHealth;
 	elif(currentHealth < 0):
 		currentHealth = 0;
-	queue_redraw()
+	queue_redraw();
 
 func _draw() -> void:
+	var centerOfBar = barPosition - size / 2
 	draw_rect(Rect2(centerOfBar, size), outColor, true, 1);
 	var currentHealthSize: Vector2 = Vector2(1.0 * currentHealth/maxHealth * size.x, size.y);
 	if(currentHealth > 0):
 		draw_rect(Rect2(centerOfBar, currentHealthSize), healthColor, true, 1);
 
 func setCoords(newCenter: Vector2):
-	centerOfBar = newCenter;
+	barPosition = newCenter;
 
 func setSize(newSize: Vector2):
 	size = newSize;
@@ -37,7 +37,7 @@ func setCurrentHealth(updatedHealth):
 	currentHealth = updatedHealth;
 
 func damage(amount):
-	currentHealth -= amount
+	currentHealth -= amount;
 
 func heal(amount):
-	currentHealth += amount
+	currentHealth += amount;

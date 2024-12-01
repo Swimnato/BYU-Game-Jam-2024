@@ -53,5 +53,4 @@ script = ExtResource("10_yx8jt")
 script = ExtResource("11_dnc7g")
 
 [node name="StatusBars" parent="." instance=ExtResource("11_o44ox")]
-position = Vector2(-261, 39)
 currentHealth = 60
