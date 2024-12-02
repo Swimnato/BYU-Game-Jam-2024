@@ -16,7 +16,7 @@ var orbit_angle = 0
 func _ready() -> void:
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame. 'delta' is the elapsed time since the previous frame.1
 func _process(delta: float) -> void:
 	match current_state:
 		states.ORBIT_LOWER:

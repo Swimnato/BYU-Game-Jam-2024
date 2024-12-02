@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://brny0obmr4vdt"]
+[gd_scene load_steps=14 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://art/temp/Space Background Dev Art.png" id="1_1jorf"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="2_36ttu"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
 [ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="11_o44ox"]
+[ext_resource type="Script" path="res://scripts/scr_asteroid_controller.gd" id="12_rr4w4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
@@ -25,8 +26,9 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_ggrqu")
 script = ExtResource("4_50ck8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDevArt"]
-rotation = -6.28319
+[node name="Area2D" type="Area2D" parent="PlanetDevArt"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlanetDevArt/Area2D"]
 scale = Vector2(30, 30)
 shape = SubResource("CircleShape2D_lqryg")
 
@@ -38,6 +40,7 @@ texture = ExtResource("5_i8m0v")
 script = ExtResource("6_bitnt")
 
 [node name="Asteroid" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-748.801, -259.703)
 rotation = -0.000753172
 scale = Vector2(-0.23, -0.23)
@@ -55,3 +58,13 @@ starting_drone_count = 10
 
 [node name="StatusBars" parent="." instance=ExtResource("11_o44ox")]
 currentHealth = 66
+
+[node name="asteroidController" type="Node2D" parent="."]
+script = ExtResource("12_rr4w4")
+
+[node name="asteroidTimer" type="Timer" parent="asteroidController"]
+wait_time = 2.0
+autostart = true
+
+[connection signal="area_entered" from="PlanetDevArt/Area2D" to="PlanetDevArt" method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="asteroidController/asteroidTimer" to="asteroidController" method="_on_asteroid_timer_timeout"]

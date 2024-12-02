@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://djygfxgldr453"]
+
+[ext_resource type="Script" path="res://scripts/scr_asteroid.gd" id="1_t2oit"]
+[ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://art/temp/Asteroid Dev Art.png" id="2_rwmw5"]
+
+[node name="Asteroid_large" type="Node2D"]
+script = ExtResource("1_t2oit")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_rwmw5")

@@ -3,7 +3,6 @@ extends Node2D
 var drones: Array
 @export var starting_drone_count = 5
 @onready var scn_drone = preload("res://scenes/scn_drone.tscn")
-@onready var scene_background = $".."
 
 @export var lower_orbit_radius = 225
 @export var upper_orbit_radius = 350
