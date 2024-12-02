@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	if endPos != startPos:
 		var size = (startPos - endPos)
-		draw_rect(Rect2(endPos, size), Color.SKY_BLUE, false, 10)
+		draw_rect(Rect2(endPos, size), Color.SKY_BLUE, false, 2)
 	
 	
 func _input(event):
