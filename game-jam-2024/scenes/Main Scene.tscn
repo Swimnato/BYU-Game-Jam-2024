@@ -16,7 +16,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqryg"]
 
 [node name="SpaceBackgroundDevArt" type="Sprite2D"]
-position = Vector2(1134, 654)
+position = Vector2(1152, 648)
 texture = ExtResource("1_1jorf")
 script = ExtResource("2_36ttu")
 
