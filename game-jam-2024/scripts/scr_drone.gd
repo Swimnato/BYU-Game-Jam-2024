@@ -16,7 +16,6 @@ var current_state = states.ORBIT_LOWER
 var orbit_angle = 0
 var selected = false;
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -29,6 +28,13 @@ func _process(delta: float) -> void:
 			move_orbit(lower_orbit_radius, delta)
 		states.ORBIT_UPPER:
 			move_orbit(upper_orbit_radius, delta)
+			
+#handle instruction state change
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if selected:
+				print("action")
 
 func move_orbit(orbit_ring: float, delta) -> void:
 	orbit_angle += orbit_speed * delta * 60
