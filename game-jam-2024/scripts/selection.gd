@@ -50,12 +50,21 @@ func _input(event):
 				if(isOverAsteroid(endPos)):
 					for drone in selectedDrones:
 						drone.attackAsteroid(selectedItem);
+				elif(isOnOrbit(endPos, lower_orbit_radius)):
+					for drone in selectedDrones:
+						drone.current_state = drone.states.ORBIT_LOWER;
+				elif(isOnOrbit(endPos, upper_orbit_radius)):
+					for drone in selectedDrones:
+						drone.current_state = drone.states.ORBIT_UPPER;
 				while(!selectedDrones.is_empty()):
 					var drone = selectedDrones[0];
 					drone.selected = false;
 					selectedDrones.erase(drone);
 			startPos = Vector2(0,0)
 			endPos = Vector2(0,0)
+			
+func isOnOrbit(coords: Vector2, radius):
+	return ((coords.x**2 + coords.y **2) ** .5 - radius) < radius / 20
 			
 func isOverAsteroid(coords: Vector2):
 	for asteroid in asteroids:

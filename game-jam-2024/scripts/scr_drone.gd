@@ -37,11 +37,9 @@ func _process(delta: float) -> void:
 			move_orbit(upper_orbit_radius, delta)
 		states.ATTACK:
 			if(asteroids.has(targetedObject)):
-				print("Moving to Asteroid!")
 				moveToObject();
 			else:
 				current_state = states.ORBIT_UPPER;
-				print("Asteroid Deleted!");
 		states.COLLECT:
 			moveToObject(true);
 			
@@ -84,8 +82,6 @@ func attackAsteroid(asteroid):
 	targetedObject = asteroid;
 	current_state = states.ATTACK;
 	asteroids = asteroid.get_parent().asteroids;
-	print("Attacking asteroid @")
-	print(asteroid.position)
 
 func collectResource(resource):
 	targetedObject = resource;
