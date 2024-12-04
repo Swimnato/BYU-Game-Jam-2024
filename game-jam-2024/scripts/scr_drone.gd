@@ -14,13 +14,15 @@ var current_state = states.ORBIT_LOWER
 @export var selecitonBoxColor = Color.AQUA;
 
 @export var attackDistance = 150;
-@export var movementSpeed = 1;
+@export var movementSpeed = 200;
 
 var orbit_angle = 0
 var selected = false;
 
 var targetedObject;
 var asteroids: Array;
+
+var sentryCoords;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,13 +39,33 @@ func _process(delta: float) -> void:
 			move_orbit(upper_orbit_radius, delta)
 		states.ATTACK:
 			if(asteroids.has(targetedObject)):
-				moveToObject();
+				moveToObject(delta);
 			else:
 				current_state = states.ORBIT_UPPER;
 		states.COLLECT:
-			moveToObject(true);
+			moveToObject(delta, true);
+		states.SENTRY:
+			moveToCoords(delta, sentryCoords);
 			
-func moveToObject(touchingObject: bool = false):
+func moveToCoords(delta, coords: Vector2):
+	var distx = coords.x - position.x;
+	var disty = coords.y - position.y;
+	var total_distance = (distx**2 + disty**2)**.5;
+	if(total_distance < movementSpeed * delta):
+		position.x = coords.x;
+		position.y = coords.y;
+	else:
+		var theta = atan(abs(disty)/abs(distx));
+		if(distx > 0):
+			position.x += movementSpeed * cos(theta) * delta;
+		else:
+			position.x -= movementSpeed * cos(theta) * delta;
+		if(disty > 0):
+			position.y += movementSpeed * sin(theta) * delta;
+		else:
+			position.y -= movementSpeed * sin(theta) * delta;
+
+func moveToObject(delta, touchingObject: bool = false):
 	var distx = targetedObject.position.x - position.x;
 	var disty = targetedObject.position.y - position.y;
 	var total_distance = (distx**2 + disty**2)**.5;
@@ -53,13 +75,13 @@ func moveToObject(touchingObject: bool = false):
 	if(total_distance >= desiredDistance):
 		var theta = atan(abs(disty)/abs(distx));
 		if(distx > 0):
-			position.x += movementSpeed * cos(theta);
+			position.x += movementSpeed * cos(theta) * delta;
 		else:
-			position.x -= movementSpeed * cos(theta);
+			position.x -= movementSpeed * cos(theta) * delta;
 		if(disty > 0):
-			position.y += movementSpeed * sin(theta);
+			position.y += movementSpeed * sin(theta) * delta;
 		else:
-			position.y -= movementSpeed * sin(theta);
+			position.y -= movementSpeed * sin(theta) * delta;
 			
 
 #handle instruction state change
@@ -77,6 +99,10 @@ func orbit_position(theta: float, radius: float) -> Vector2:
 	var x =  sin(deg_to_rad(theta)) * radius
 	var y = -cos(deg_to_rad(theta)) * radius
 	return Vector2(x, y)
+	
+func standSentry(coords: Vector2):
+	sentryCoords = coords;
+	current_state = states.SENTRY;
 	
 func attackAsteroid(asteroid):
 	targetedObject = asteroid;

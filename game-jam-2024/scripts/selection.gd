@@ -56,6 +56,9 @@ func _input(event):
 				elif(isOnOrbit(endPos, upper_orbit_radius)):
 					for drone in selectedDrones:
 						drone.current_state = drone.states.ORBIT_UPPER;
+				else:
+					for drone in selectedDrones:
+						drone.standSentry(endPos);
 				while(!selectedDrones.is_empty()):
 					var drone = selectedDrones[0];
 					drone.selected = false;
