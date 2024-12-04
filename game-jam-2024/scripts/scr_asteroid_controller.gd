@@ -4,6 +4,7 @@ extends Node2D
 @onready var scene_background = $".."
 @onready var width = scene_background.nativeResolution.x
 @onready var height = scene_background.nativeResolution.y
+var asteroids: Array
 
 var rng = RandomNumberGenerator.new()
 
@@ -21,4 +22,5 @@ func _on_asteroid_timer_timeout() -> void:
 	var x = ((rng.randf() - 0.5) * width) if not spawn_side % 2 else (width if (spawn_side + 1) % 4 else -width)
 	var y = ((rng.randf() - 0.5) * height) if spawn_side % 2 else (height if spawn_side % 4 else -height)
 	asteroid.position = Vector2(x, y)
+	asteroids.append(asteroid);
 	add_child(asteroid)

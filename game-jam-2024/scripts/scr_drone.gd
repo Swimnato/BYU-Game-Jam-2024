@@ -16,6 +16,8 @@ var current_state = states.ORBIT_LOWER
 var orbit_angle = 0
 var selected = false;
 
+var targetedObject;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -34,7 +36,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if selected:
-				print("action")
+				pass#print("action")
 
 func move_orbit(orbit_ring: float, delta) -> void:
 	orbit_angle += orbit_speed * delta * 60
@@ -44,6 +46,14 @@ func orbit_position(theta: float, radius: float) -> Vector2:
 	var x =  sin(deg_to_rad(theta)) * radius
 	var y = -cos(deg_to_rad(theta)) * radius
 	return Vector2(x, y)
+	
+func attackAsteroid(asteroid):
+	targetedObject = asteroid;
+	print("Attacking asteroid @")
+	print(asteroid.position)
+
+func collectResource(resource):
+	targetedObject = resource;
 
 func _draw() -> void:
 	if selected:

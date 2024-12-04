@@ -5,9 +5,15 @@ var startPos = Vector2(0,0);
 var endPos = Vector2(0,0);
 var isMouseDown = false;
 
+const mouseMovementThreshold = 2;
+const asteroidSize = Vector2(40,40);
+
 @onready var drones = $"../droneController".drones;
+@onready var asteroids = $"../asteroidController".asteroids;
 
 var selectedDrones: Array;
+
+var selectedItem;
 
 func _ready() -> void:
 	pass
@@ -18,7 +24,8 @@ func _process(delta: float) -> void:
 	queue_redraw()
 	if isMouseDown:
 		endPos = convertToRelativeCoordinates(get_global_mouse_position());
-		selectedDrones = findDronesInRange(startPos, endPos);
+		if(abs(endPos.x - startPos.x) > mouseMovementThreshold and abs(endPos.y - startPos.y) > mouseMovementThreshold):
+			selectedDrones = findDronesInRange(startPos, endPos);
 
 func _draw() -> void:
 	if endPos != startPos:
@@ -33,8 +40,18 @@ func _input(event):
 			isMouseDown = true
 		elif event.is_released():
 			isMouseDown = false
+			if(abs(endPos.x - startPos.x) < mouseMovementThreshold or abs(endPos.y - startPos.y) < mouseMovementThreshold):
+				if(isOverAsteroid(endPos)):
+					for drone in selectedDrones:
+						drone.attackAsteroid(selectedItem);
 			startPos = Vector2(0,0)
 			endPos = Vector2(0,0)
+			
+func isOverAsteroid(coords: Vector2):
+	for asteroid in asteroids:
+		if(abs(asteroid.position.x - coords.x) <= asteroidSize.x / 2 and abs(asteroid.position.y - coords.y) <= asteroidSize.y / 2):
+			selectedItem = asteroid;
+			return true;
 
 func convertToRelativeCoordinates(coords) -> Vector2:
 	var newX = (coords.x - (nativeResolution.x))
