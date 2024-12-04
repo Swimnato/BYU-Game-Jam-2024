@@ -11,6 +11,9 @@ const asteroidSize = Vector2(40,40);
 @onready var drones = $"../droneController".drones;
 @onready var asteroids = $"../asteroidController".asteroids;
 
+@onready var lower_orbit_radius = $"../droneController".lower_orbit_radius
+@onready var upper_orbit_radius = $"../droneController".upper_orbit_radius
+
 var selectedDrones: Array;
 
 var selectedItem;
@@ -31,6 +34,9 @@ func _draw() -> void:
 	if endPos != startPos:
 		var size = (startPos - endPos)
 		draw_rect(Rect2(endPos, size), Color.SKY_BLUE, false, 2)
+	if(selectedDrones.size() > 0 and isMouseDown == false):
+		draw_circle(Vector2(0,0), lower_orbit_radius, Color.GREEN, false, 2);
+		draw_circle(Vector2(0,0), upper_orbit_radius, Color.GREEN, false, 2);
 	
 	
 func _input(event):
@@ -44,6 +50,10 @@ func _input(event):
 				if(isOverAsteroid(endPos)):
 					for drone in selectedDrones:
 						drone.attackAsteroid(selectedItem);
+				while(!selectedDrones.is_empty()):
+					var drone = selectedDrones[0];
+					drone.selected = false;
+					selectedDrones.erase(drone);
 			startPos = Vector2(0,0)
 			endPos = Vector2(0,0)
 			
