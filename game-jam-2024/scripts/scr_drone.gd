@@ -30,7 +30,7 @@ var sentryCoords;
 
 @export var attackDamage = 10;
 @export var attackRate = 500;
-@export var laserColor = Color.BLUE_VIOLET;
+@export var laserColor = Color.TEAL;
 @export var agroRange = 250;
 var lastAttack = 0;
 
@@ -39,6 +39,13 @@ var lastAttack = 0;
 @export var dischargeRate = 5;
 @export var attackEnergy = 5;
 var energy = maxEnergy;
+
+var rechargingFrame = preload("res://art/RAYchargingbattery.png");
+var chargingLaserFrame = preload("res://art/chargedRAYdrone.png");
+var firingLaserFrame = preload("res://art/chargedRAYdrone2.png");
+var idle = preload("res://art/drone.png");
+
+@onready var image = $Drone;
 
 
 
@@ -54,12 +61,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	statusBar.setCurrentHealth(energy);
 	queue_redraw();
+	image.texture = idle;
 	if energy > 0:
 		match current_state:
 			states.ORBIT_LOWER:
+				image.texture = rechargingFrame;
 				inRangeOfAteroid = false
 				move_orbit(lower_orbit_radius, delta)
 				energy += delta * rechargeRate;
+				
 			states.ORBIT_UPPER:
 				inRangeOfAteroid = false
 				move_orbit(upper_orbit_radius, delta)
@@ -71,9 +81,16 @@ func _process(delta: float) -> void:
 					inRangeOfAteroid = false
 					current_state = states.ORBIT_UPPER;
 				if(inRangeOfAteroid):
-					damageAsteroid(delta);
+					lastAttack += delta * 1000;
+					if(lastAttack >= attackRate):
+						damageAsteroid();
+					if(lastAttack >= attackRate / 3 * 2):
+						image.texture = firingLaserFrame;
+					elif(lastAttack >= attackRate / 3):
+						image.texture = chargingLaserFrame;
+					
 			states.COLLECT:
-				inRangeOfAteroid = false
+				inRangeOfAteroid = false;
 				moveToObject(delta, true);
 			states.SENTRY:
 				targetNearbyAsteroids();
@@ -92,9 +109,7 @@ func targetNearbyAsteroids():
 		if(distance <= agroRange):
 			attackAsteroid(asteroid);
 
-func damageAsteroid(delta):
-	lastAttack += delta * 1000;
-	if(lastAttack >= attackRate):
+func damageAsteroid():
 		targetedObject.damage(attackDamage);
 		lastAttack = 0;
 		energy -= attackEnergy;
