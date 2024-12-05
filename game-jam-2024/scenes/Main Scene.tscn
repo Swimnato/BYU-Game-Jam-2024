@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cs8408cxdt5o0" path="res://art/prod/betterORCA.png" id="6_2crcs"]
 [ext_resource type="Script" path="res://scripts/main_ship_dev_art.gd" id="6_bitnt"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
-[ext_resource type="PackedScene" uid="uid://cotkl6hk3p0wj" path="res://scenes/scn_score.tscn" id="11_4nubn"]
+[ext_resource type="PackedScene" path="res://scenes/scn_score.tscn" id="11_4nubn"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
 [ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="11_o44ox"]
 [ext_resource type="Script" path="res://scripts/scr_asteroid_controller.gd" id="12_rr4w4"]

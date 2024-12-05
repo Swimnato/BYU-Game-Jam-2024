@@ -23,6 +23,7 @@ var selected = false;
 
 var targetedObject;
 @onready var asteroids: Array = get_parent().asteroids;
+@onready var scraps: Array = get_parent().scraps;
 
 var inRangeOfAteroid = false;
 
@@ -99,7 +100,11 @@ func _process(delta: float) -> void:
 					
 			states.COLLECT:
 				inRangeOfAteroid = false;
-				moveToObject(delta, true);
+				if(targetedObject != null):
+					moveToObject(delta, true);
+				else:
+					inRangeOfAteroid = false
+					current_state = states.ORBIT_UPPER;
 			states.SENTRY:
 				targetNearbyAsteroids();
 				inRangeOfAteroid = false
@@ -145,6 +150,8 @@ func moveToObject(delta, touchingObject: bool = false):
 	var disty = targetedObject.position.y - position.y
 	var total_distance = (distx**2 + disty**2)**.5;
 	var desiredDistance = attackDistance;
+	if(touchingObject):
+		desiredDistance = 0;
 	var theta = atan2(disty,distx)
 	if abs((rotation / 2) - theta) > deg_to_rad(3):
 		theta = lerp(rotation, theta, 0.05);

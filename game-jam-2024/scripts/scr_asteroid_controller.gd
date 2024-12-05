@@ -11,7 +11,7 @@ var rng = RandomNumberGenerator.new()
 
 @onready var selection = $"../Selection"
 
-@onready var scraps = $"../Selection".scraps;
+@onready var scraps:Array = $"../Selection".scraps;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
