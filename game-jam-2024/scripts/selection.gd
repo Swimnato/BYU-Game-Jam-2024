@@ -27,8 +27,8 @@ func _process(delta: float) -> void:
 	queue_redraw()
 	if isMouseDown:
 		endPos = convertToRelativeCoordinates(get_global_mouse_position());
-		if(abs(endPos.x - startPos.x) > mouseMovementThreshold and abs(endPos.y - startPos.y) > mouseMovementThreshold):
-			selectedDrones = findDronesInRange(startPos, endPos);
+		#if(abs(endPos.x - startPos.x) > mouseMovementThreshold and abs(endPos.y - startPos.y) > mouseMovementThreshold):
+		selectedDrones = findDronesInRange(startPos, endPos);
 
 func _draw() -> void:
 	if endPos != startPos:
@@ -46,26 +46,26 @@ func _input(event):
 			isMouseDown = true
 		elif event.is_released():
 			isMouseDown = false
-			if(abs(endPos.x - startPos.x) < mouseMovementThreshold or abs(endPos.y - startPos.y) < mouseMovementThreshold):
-				if(isOverAsteroid(endPos)):
-					for drone in selectedDrones:
-						drone.attackAsteroid(selectedItem);
-				elif(isOnOrbit(endPos, lower_orbit_radius)):
-					for drone in selectedDrones:
-						drone.current_state = drone.states.ORBIT_LOWER;
-				elif(isOnOrbit(endPos, upper_orbit_radius)):
-					for drone in selectedDrones:
-						drone.current_state = drone.states.ORBIT_UPPER;
-				else:
-					for drone in selectedDrones:
-						drone.standSentry(endPos);
-				while(!selectedDrones.is_empty()):
-					var drone = selectedDrones[0];
-					drone.selected = false;
-					selectedDrones.erase(drone);
+			#if(abs(endPos.x - startPos.x) < mouseMovementThreshold or abs(endPos.y - startPos.y) < mouseMovementThreshold):
+				#if(isOverAsteroid(endPos)):
+					#for drone in selectedDrones:
+						#drone.attackAsteroid(selectedItem);
+				#elif(isOnOrbit(endPos, lower_orbit_radius)):
+					#for drone in selectedDrones:
+						#drone.current_state = drone.states.ORBIT_LOWER;
+				#elif(isOnOrbit(endPos, upper_orbit_radius)):
+					#for drone in selectedDrones:
+						#drone.current_state = drone.states.ORBIT_UPPER;
+				#else:
+					#for drone in selectedDrones:
+						#drone.standSentry(endPos);
+				#while(!selectedDrones.is_empty()):
+					#var drone = selectedDrones[0];
+					#drone.selected = false;
+					#selectedDrones.erase(drone);
 			startPos = Vector2(0,0)
 			endPos = Vector2(0,0)
-			
+
 func isOnOrbit(coords: Vector2, radius):
 	return ((coords.x**2 + coords.y **2) ** .5 - radius) < radius / 20
 			
