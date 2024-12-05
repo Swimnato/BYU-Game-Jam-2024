@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@export var max_hp = 100
+@export var max_hp = 10
 @export var damage_tick = 5
 @export var current_hp = max_hp
 
