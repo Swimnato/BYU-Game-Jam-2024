@@ -43,7 +43,10 @@ var energy = maxEnergy;
 var rechargingFrame = preload("res://art/RAYchargingbattery.png");
 var chargingLaserFrame = preload("res://art/chargedRAYdrone.png");
 var firingLaserFrame = preload("res://art/chargedRAYdrone2.png");
-var idle = preload("res://art/drone.png");
+var idle: Array = [preload("res://art/RAYidle1.png"), preload("res://art/RAYidle2.png"), preload("res://art/RAYidle3.png"), preload("res://art/RAYidle2.png")];
+var currentIdle = 0;
+@export var timeOnEachFrame = .33;
+var timeSinceLastFrameChange = 0;
 
 @onready var image = $Drone;
 
@@ -61,8 +64,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	statusBar.setCurrentHealth(energy);
 	queue_redraw();
-	image.texture = idle;
+	image.texture = idle[currentIdle];
 	if energy > 0:
+		timeSinceLastFrameChange += delta;
+		if(timeSinceLastFrameChange >= timeOnEachFrame):
+			currentIdle += 1;
+			timeSinceLastFrameChange = 0;
+		if(currentIdle >= idle.size()):
+			currentIdle = 0;
 		match current_state:
 			states.ORBIT_LOWER:
 				image.texture = rechargingFrame;
