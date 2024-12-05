@@ -18,6 +18,13 @@ var selectedDrones: Array;
 
 var selectedItem;
 
+var selectCursor = preload("res://art/selectcursor.png");
+var selectCursorHotspot = Vector2(90,65)/5;
+var attackCursor = preload("res://art/attackcursor.png");
+var attackCursorHotspot = Vector2(550/2,550/2)/5;
+var collectCursor = preload("res://art/collectcursor.png");
+var collectCursorHotspot = Vector2(550/2,550/2)/5;
+
 func _ready() -> void:
 	pass
 
@@ -29,6 +36,16 @@ func _process(delta: float) -> void:
 		endPos = convertToRelativeCoordinates(get_global_mouse_position());
 		if(abs(endPos.x - startPos.x) > mouseMovementThreshold and abs(endPos.y - startPos.y) > mouseMovementThreshold):
 			selectedDrones = findDronesInRange(startPos, endPos);
+	elif(not(selectedDrones.is_empty())):
+		var foundAsteroid = false;
+		for asteroid in asteroids:
+			if(asteroid.mouse_is_over):
+				Input.set_custom_mouse_cursor(attackCursor, Input.CURSOR_ARROW, attackCursorHotspot);
+				foundAsteroid = true;
+		if not(foundAsteroid):
+			Input.set_custom_mouse_cursor(selectCursor, Input.CURSOR_ARROW, selectCursorHotspot);
+	else:
+		Input.set_custom_mouse_cursor(selectCursor, Input.CURSOR_ARROW, selectCursorHotspot);
 
 func _draw() -> void:
 	if endPos != startPos:
