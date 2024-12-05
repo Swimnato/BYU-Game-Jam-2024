@@ -20,6 +20,8 @@ var selectedItem;
 
 var scraps: Array;
 
+@onready var planet = $"../PlanetDevArt"
+
 var selectCursor = preload("res://art/selectcursor.png");
 var selectCursorHotspot = Vector2(90,65)/5/3;
 var attackCursor = preload("res://art/attackcursor.png");
@@ -65,7 +67,7 @@ func _draw() -> void:
 	
 	
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and not planet.dead:
 		if event.is_pressed():
 			startPos = convertToRelativeCoordinates(get_global_mouse_position());
 			isMouseDown = true

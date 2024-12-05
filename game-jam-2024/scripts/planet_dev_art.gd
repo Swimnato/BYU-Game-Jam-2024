@@ -17,6 +17,10 @@ var timeSinceLastFrameChange = 0;
 var lastFlash = 0;
 var rotationsForFlash = 7;
 
+@onready var score = $"../ScnScore"
+
+var dead = false;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position.x = 0
@@ -58,3 +62,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func take_damage(dmg: float) -> void:
 	current_hp -= dmg
+	if current_hp <= 0:
+		score.die()
+		dead = true;
