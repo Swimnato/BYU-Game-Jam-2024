@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cotkl6hk3p0wj"]
+[gd_scene load_steps=4 format=3 uid="uid://cotkl6hk3p0wj"]
 
 [ext_resource type="Script" path="res://scripts/scr_score.gd" id="1_0ht2t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3ev6"]
 font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_mesu0"]
+font_size = 46
 
 [node name="ScnScore" type="Node2D"]
 script = ExtResource("1_0ht2t")
@@ -18,3 +21,24 @@ offset_bottom = 86.0
 text = "0
 "
 label_settings = SubResource("LabelSettings_q3ev6")
+
+[node name="FinalScore" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 441.0
+offset_top = 284.0
+offset_right = 706.0
+offset_bottom = 367.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_q3ev6")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 199.0
+offset_top = 203.0
+offset_right = 948.0
+offset_bottom = 459.0
+text = "Planet destroyed. Your score was:"
+label_settings = SubResource("LabelSettings_mesu0")
+horizontal_alignment = 1
