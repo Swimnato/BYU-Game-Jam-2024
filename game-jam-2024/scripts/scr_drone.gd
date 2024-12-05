@@ -10,7 +10,7 @@ var current_state = states.ORBIT_LOWER
 @export var orbit_speed = 1
 @export var attack_speed = 5
 
-@export var selectionBoxSize = Vector2(60,40);
+@export var selectionBoxSize = Vector2(80,90);
 @export var selecitonBoxColor = Color.AQUA;
 
 @export var attackDistance = 150;
@@ -24,11 +24,19 @@ var selected = false;
 var targetedObject;
 var asteroids: Array;
 
+var inRangeOfAteroid = false;
+
 var sentryCoords;
+
+@export var attackDamage = 10;
+@export var attackRate = 500;
+var lastAttack = 0;
 
 @export var maxEnergy = 100;
 @export var rechargeRate = 20;
-var energy = 30;
+@export var dischargeRate = 5;
+@export var attackEnergy = 5;
+var energy = maxEnergy;
 
 
 
@@ -44,21 +52,40 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	statusBar.setCurrentHealth(energy);
 	queue_redraw();
-	match current_state:
-		states.ORBIT_LOWER:
-			move_orbit(lower_orbit_radius, delta)
-			energy += delta * rechargeRate;
-		states.ORBIT_UPPER:
-			move_orbit(upper_orbit_radius, delta)
-		states.ATTACK:
-			if(asteroids.has(targetedObject)):
-				moveToObject(delta);
-			else:
-				current_state = states.ORBIT_UPPER;
-		states.COLLECT:
-			moveToObject(delta, true);
-		states.SENTRY:
-			moveToCoords(delta, sentryCoords);
+	if energy > 0:
+		match current_state:
+			states.ORBIT_LOWER:
+				inRangeOfAteroid = false
+				move_orbit(lower_orbit_radius, delta)
+				energy += delta * rechargeRate;
+			states.ORBIT_UPPER:
+				inRangeOfAteroid = false
+				move_orbit(upper_orbit_radius, delta)
+			states.ATTACK:
+				if(asteroids.has(targetedObject)):
+					moveToObject(delta);
+				else:
+					inRangeOfAteroid = false
+					current_state = states.ORBIT_UPPER;
+				if(inRangeOfAteroid):
+					damageAsteroid(delta);
+			states.COLLECT:
+				inRangeOfAteroid = false
+				moveToObject(delta, true);
+			states.SENTRY:
+				inRangeOfAteroid = false
+				moveToCoords(delta, sentryCoords);
+	
+	if(energy > maxEnergy):
+		energy = maxEnergy;
+	if(energy < 0):
+		energy = 0;
+		
+func damageAsteroid(delta):
+	lastAttack += delta * 1000;
+	if(lastAttack >= attackRate):
+		targetedObject.damage(attackDamage);
+		lastAttack = 0;
 			
 func moveToCoords(delta, coords: Vector2):
 	var distx = coords.x - position.x;
@@ -67,10 +94,12 @@ func moveToCoords(delta, coords: Vector2):
 	if(total_distance < movementSpeed * delta):
 		position.x = coords.x;
 		position.y = coords.y;
+		energy += delta * dischargeRate * total_distance / movementSpeed;
 	else:
 		var theta = atan2(disty,distx);
 		rotation = theta
 		position += movementSpeed * Vector2(cos(theta), sin(theta)) * delta
+		energy -= delta * dischargeRate
 
 
 func moveToObject(delta, touchingObject: bool = false):
@@ -78,12 +107,14 @@ func moveToObject(delta, touchingObject: bool = false):
 	var disty = targetedObject.position.y - position.y
 	var total_distance = (distx**2 + disty**2)**.5;
 	var desiredDistance = attackDistance;
-	if(touchingObject):
-		desiredDistance = 0
 	if(total_distance >= desiredDistance):
+		inRangeOfAteroid = false;
 		var theta = atan2(disty,distx);
 		rotation = theta
 		position += movementSpeed * Vector2(cos(theta), sin(theta)) * delta
+		energy -= delta * dischargeRate
+	else:
+		inRangeOfAteroid = true;
 		
 
 #handle instruction state change

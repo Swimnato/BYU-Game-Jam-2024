@@ -36,6 +36,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	healthBar.setCurrentHealth(hp);
 	move(delta)
+	if hp <= 0:
+		get_parent().asteroids.erase(self);
+		self.queue_free();
+
+func damage(amount: int = 10):
+	hp -= amount;
 
 func move(delta: float) -> void:
 	position += angle * speed * delta * 60
