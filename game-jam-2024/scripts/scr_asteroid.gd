@@ -25,6 +25,8 @@ var speed = rng.randf_range(min_speed, max_speed)
 
 var mouse_is_over = false
 
+@onready var score = $"../../ScnScore"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	healthBar.setMaxHealth(maxHP);
@@ -39,6 +41,7 @@ func _process(delta: float) -> void:
 	healthBar.setCurrentHealth(hp);
 	move(delta)
 	if hp <= 0:
+		score.update_score()
 		get_parent().asteroids.erase(self);
 		self.queue_free();
 
