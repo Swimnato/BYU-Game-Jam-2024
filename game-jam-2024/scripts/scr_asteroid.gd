@@ -15,7 +15,6 @@ var current_type = types.LARGE
 var speed = rng.randf_range(min_speed, max_speed)
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -26,7 +25,7 @@ func _process(delta: float) -> void:
 	if abs(position.x) < thresholdAroundPlanet  and abs(position.y) < thresholdAroundPlanet:
 		#deal damage to planet
 		get_parent().asteroids.erase(self);
-		get_parent().remove_child(self)
+		#get_parent().remove_child(self)
 
 func move(delta: float) -> void:
 	position += angle * speed * delta * 60
