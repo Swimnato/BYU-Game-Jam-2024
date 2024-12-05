@@ -25,6 +25,7 @@ var speed = rng.randf_range(min_speed, max_speed)
 
 var mouse_is_over = false
 
+var scrapScene = preload("res://scenes/Resource.tscn")
 @onready var score = $"../../ScnScore"
 
 # Called when the node enters the scene tree for the first time.
@@ -41,6 +42,9 @@ func _process(delta: float) -> void:
 	healthBar.setCurrentHealth(hp);
 	move(delta)
 	if hp <= 0:
+		var newScrap = scrapScene.instantiate();
+		newScrap.position = position;
+		get_parent().addScrap(newScrap);
 		score.update_score()
 		get_parent().asteroids.erase(self);
 		self.queue_free();
