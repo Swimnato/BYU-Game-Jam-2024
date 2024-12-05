@@ -77,8 +77,7 @@ func _process(delta: float) -> void:
 				image.texture = rechargingFrame;
 				inRangeOfAteroid = false
 				move_orbit(lower_orbit_radius, delta)
-				energy += delta * rechargeRate;
-				
+				energy += delta * rechargeRate;	
 			states.ORBIT_UPPER:
 				inRangeOfAteroid = false
 				move_orbit(upper_orbit_radius, delta)
@@ -104,8 +103,8 @@ func _process(delta: float) -> void:
 			states.SENTRY:
 				targetNearbyAsteroids();
 				inRangeOfAteroid = false
-				moveToCoords(delta, sentryCoords);
-	
+				if(position - sentryCoords).length() > 5:
+					moveToCoords(delta, sentryCoords);
 	if(energy > maxEnergy):
 		energy = maxEnergy;
 	if(energy < 0):
@@ -127,14 +126,16 @@ func moveToCoords(delta, coords: Vector2):
 	var distx = coords.x - position.x;
 	var disty = coords.y - position.y;
 	var total_distance = (distx**2 + disty**2)**.5;
-	var theta = atan2(disty,distx);
+	var theta = atan2(disty,distx)
+	#if abs(rotation - theta) > 0.1:
+	if abs((rotation / 2) - theta) > deg_to_rad(3):
+			theta = lerp(rotation, theta, 0.05);
 	rotation = theta
 	if(total_distance < movementSpeed * delta):
 		position.x = coords.x;
 		position.y = coords.y;
 		energy += delta * dischargeRate * total_distance / movementSpeed;
 	else:
-		
 		position += movementSpeed * Vector2(cos(theta), sin(theta)) * delta
 		energy -= delta * dischargeRate
 
@@ -144,16 +145,19 @@ func moveToObject(delta, touchingObject: bool = false):
 	var disty = targetedObject.position.y - position.y
 	var total_distance = (distx**2 + disty**2)**.5;
 	var desiredDistance = attackDistance;
-	var theta = atan2(disty,distx);
+	var theta = atan2(disty,distx)
+	if abs((rotation / 2) - theta) > deg_to_rad(3):
+		theta = lerp(rotation, theta, 0.05);
 	rotation = theta
 	if(total_distance > desiredDistance):
 		inRangeOfAteroid = false;
-		position += movementSpeed * Vector2(cos(theta), sin(theta)) * delta
+		position += movementSpeed * Vector2(cos(theta), sin(theta)).normalized() * delta
 		energy -= delta * dischargeRate
 	else:
+		theta = atan2(disty,distx)
 		inRangeOfAteroid = true;
 		if(total_distance < desiredDistance - 10):
-			position -= movementSpeed * Vector2(cos(theta), sin(theta)) * delta
+			position -= movementSpeed * Vector2(cos(theta), sin(theta)).normalized() * delta
 			energy -= delta * dischargeRate
 		
 
@@ -167,7 +171,7 @@ func moveToObject(delta, touchingObject: bool = false):
 func move_orbit(orbit_ring: float, delta) -> void:
 	orbit_angle += orbit_speed * delta * 60
 	var pos = orbit_position(orbit_angle, orbit_ring)
-	position = pos
+	position = lerp(position, pos, 0.1)
 	rotation = Vector2(-pos.y, pos.x).angle()
 	
 func orbit_position(theta: float, radius: float) -> Vector2:

@@ -5,7 +5,7 @@ var startPos = Vector2(0,0);
 var endPos = Vector2(0,0);
 var isMouseDown = false;
 
-const mouseMovementThreshold = 2;
+const mouseMovementThreshold = 25;
 const asteroidSize = Vector2(40,40);
 
 @onready var drones = $"../droneController".drones;
