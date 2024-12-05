@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b085awiqw0xvj"]
+
+[ext_resource type="Texture2D" uid="uid://1twjjr8u3ljx" path="res://art/metalscrap.png" id="1_c6x5x"]
+[ext_resource type="Script" path="res://resource.gd" id="1_olv3e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6j0b7"]
+
+[node name="Resources" type="Node2D"]
+script = ExtResource("1_olv3e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.196, 0.196)
+texture = ExtResource("1_c6x5x")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+scale = Vector2(40, 40)
+shape = SubResource("CircleShape2D_6j0b7")
+
+[connection signal="mouse_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_mouse_exited"]

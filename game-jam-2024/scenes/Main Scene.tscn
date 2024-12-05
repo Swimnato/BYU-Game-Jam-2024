@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://brny0obmr4vdt"]
+[gd_scene load_steps=14 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://art/temp/Space Background Dev Art.png" id="1_1jorf"]
+[ext_resource type="Texture2D" uid="uid://c2v5h7w0bjnx" path="res://art/space.png" id="1_qwhqj"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="2_36ttu"]
 [ext_resource type="Texture2D" uid="uid://cmduooauniiw7" path="res://art/prod/idleflash.png" id="3_5j06c"]
 [ext_resource type="Script" path="res://scripts/planet_dev_art.gd" id="4_50ck8"]
 [ext_resource type="Texture2D" uid="uid://cs8408cxdt5o0" path="res://art/prod/betterORCA.png" id="6_2crcs"]
 [ext_resource type="Script" path="res://scripts/main_ship_dev_art.gd" id="6_bitnt"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
-[ext_resource type="PackedScene" uid="uid://cotkl6hk3p0wj" path="res://scenes/scn_score.tscn" id="11_4nubn"]
+[ext_resource type="PackedScene" path="res://scenes/scn_score.tscn" id="11_4nubn"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
 [ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="11_o44ox"]
 [ext_resource type="Script" path="res://scripts/scr_asteroid_controller.gd" id="12_rr4w4"]
@@ -18,6 +19,11 @@
 position = Vector2(1152, 648)
 texture = ExtResource("1_1jorf")
 script = ExtResource("2_36ttu")
+
+[node name="Space" type="Sprite2D" parent="."]
+position = Vector2(154.5, 206.5)
+scale = Vector2(1.64063, 1.42917)
+texture = ExtResource("1_qwhqj")
 
 [node name="PlanetDevArt" type="Sprite2D" parent="."]
 rotation = -0.00349066

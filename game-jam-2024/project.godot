@@ -13,7 +13,13 @@ config_version=5
 config/name="Game Jam 2024"
 run/main_scene="res://scenes/Main Scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/image="res://art/titlescreen.png"
 config/icon="res://art/temp/Asteroid Dev Art.png"
+
+[display]
+
+mouse_cursor/custom_image="res://art/selectcursor.png"
+mouse_cursor/custom_image_hotspot=Vector2(90, 65)
 
 [rendering]
 
