@@ -18,12 +18,14 @@ var selectedDrones: Array;
 
 var selectedItem;
 
+var scraps: Array;
+
 var selectCursor = preload("res://art/selectcursor.png");
 var selectCursorHotspot = Vector2(90,65)/5/3;
 var attackCursor = preload("res://art/attackcursor.png");
 var attackCursorHotspot = Vector2(550/2,550/2)/5/3;
 var collectCursor = preload("res://art/collectcursor.png");
-var collectCursorHotspot = Vector2(550/2,550/2)/5/3;
+var collectCursorHotspot = attackCursorHotspot;
 
 func _ready() -> void:
 	pass
@@ -44,7 +46,10 @@ func _process(delta: float) -> void:
 				foundAsteroid = true;
 		if not(foundAsteroid):
 			var scrapFound = false;
-			
+			for scrap in scraps:
+				if(scrap.mouse_is_over):
+					Input.set_custom_mouse_cursor(collectCursor, Input.CURSOR_ARROW, collectCursorHotspot);
+					scrapFound = true;
 			if not(scrapFound):
 				Input.set_custom_mouse_cursor(selectCursor, Input.CURSOR_ARROW, selectCursorHotspot);
 	else:
@@ -70,6 +75,9 @@ func _input(event):
 				if(isOverAsteroid(endPos)):
 					for drone in selectedDrones:
 						drone.attackAsteroid(selectedItem);
+				elif(isOverScrap()):
+					for drone in selectedDrones:
+						drone.collectResource(selectedItem);
 				elif(isOnOrbit(endPos, lower_orbit_radius)):
 					for drone in selectedDrones:
 						drone.current_state = drone.states.ORBIT_LOWER;
@@ -85,6 +93,12 @@ func _input(event):
 					selectedDrones.erase(drone);
 			startPos = Vector2(0,0)
 			endPos = Vector2(0,0)
+
+func isOverScrap():
+	for scrap in scraps:
+		if(scrap.mouse_is_over):
+			selectedItem = scrap;
+			return true
 			
 func isOnOrbit(coords: Vector2, radius):
 	return ((coords.x**2 + coords.y **2) ** .5 - radius) < radius / 20

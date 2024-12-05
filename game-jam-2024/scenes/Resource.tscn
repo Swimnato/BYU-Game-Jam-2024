@@ -9,7 +9,7 @@
 script = ExtResource("1_olv3e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.196, 0.196)
+scale = Vector2(0.098, 0.098)
 texture = ExtResource("1_c6x5x")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
@@ -18,5 +18,7 @@ texture = ExtResource("1_c6x5x")
 scale = Vector2(40, 40)
 shape = SubResource("CircleShape2D_6j0b7")
 
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="mouse_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_mouse_exited"]

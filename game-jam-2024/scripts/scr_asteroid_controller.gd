@@ -11,6 +11,8 @@ var rng = RandomNumberGenerator.new()
 
 @onready var selection = $"../Selection"
 
+@onready var scraps = $"../Selection".scraps;
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.start()
@@ -30,3 +32,7 @@ func _on_asteroid_timer_timeout() -> void:
 	if timer.wait_time > 0.5:
 		timer.wait_time *= 0.98
 	timer.start()
+
+func addScrap(scrap):
+	scraps.append(scrap);
+	$"../Selection".add_child(scrap);

@@ -25,6 +25,8 @@ var speed = rng.randf_range(min_speed, max_speed)
 
 var mouse_is_over = false
 
+var scrapScene = preload("res://scenes/Resource.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	healthBar.setMaxHealth(maxHP);
@@ -39,6 +41,9 @@ func _process(delta: float) -> void:
 	healthBar.setCurrentHealth(hp);
 	move(delta)
 	if hp <= 0:
+		var newScrap = scrapScene.instantiate();
+		newScrap.position = position;
+		get_parent().addScrap(newScrap);
 		get_parent().asteroids.erase(self);
 		self.queue_free();
 
