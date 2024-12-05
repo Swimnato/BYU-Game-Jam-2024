@@ -1,11 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3thy6csnhwc2"]
 
 [ext_resource type="Script" path="res://scripts/scr_drone.gd" id="1_3dp6e"]
-[ext_resource type="Texture2D" uid="uid://cevdhb566aodp" path="res://art/temp/Drone Ship Dev Art.png" id="1_c3u66"]
+[ext_resource type="Texture2D" uid="uid://caw7fj0p5fil" path="res://art/drone.png" id="2_1k4ej"]
 
 [node name="Drone" type="Node2D"]
 script = ExtResource("1_3dp6e")
 
-[node name="spr_drone" type="Sprite2D" parent="."]
+[node name="Drone" type="Sprite2D" parent="."]
+position = Vector2(1, 2)
+rotation = 1.5708
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_c3u66")
+texture = ExtResource("2_1k4ej")

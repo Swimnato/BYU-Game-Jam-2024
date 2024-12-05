@@ -14,3 +14,7 @@ config/name="Game Jam 2024"
 run/main_scene="res://scenes/Main Scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://art/temp/Asteroid Dev Art.png"
+
+[rendering]
+
+anti_aliasing/quality/msaa_2d=1
