@@ -1,8 +1,8 @@
 extends Sprite2D
 
-@export var max_hp = 10
+@export var max_hp = 100
 @export var damage_tick = 5
-@export var current_hp = max_hp
+var current_hp = max_hp
 
 @onready var healthBar = $Status_Bars;
 @onready var asteroids = $"../asteroidController".asteroids;
