@@ -1,4 +1,3 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3thy6csnhwc2"]
 
 [ext_resource type="Script" path="res://scripts/scr_drone.gd" id="1_3dp6e"]
 [ext_resource type="Texture2D" uid="uid://caw7fj0p5fil" path="res://art/drone.png" id="2_1k4ej"]

@@ -1,4 +1,3 @@
-[gd_scene load_steps=14 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://art/temp/Space Background Dev Art.png" id="1_1jorf"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="2_36ttu"]
