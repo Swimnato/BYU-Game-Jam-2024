@@ -19,11 +19,11 @@ var selectedDrones: Array;
 var selectedItem;
 
 var selectCursor = preload("res://art/selectcursor.png");
-var selectCursorHotspot = Vector2(90,65)/5;
+var selectCursorHotspot = Vector2(90,65)/5/3;
 var attackCursor = preload("res://art/attackcursor.png");
-var attackCursorHotspot = Vector2(550/2,550/2)/5;
+var attackCursorHotspot = Vector2(550/2,550/2)/5/3;
 var collectCursor = preload("res://art/collectcursor.png");
-var collectCursorHotspot = Vector2(550/2,550/2)/5;
+var collectCursorHotspot = Vector2(550/2,550/2)/5/3;
 
 func _ready() -> void:
 	pass
@@ -43,7 +43,10 @@ func _process(delta: float) -> void:
 				Input.set_custom_mouse_cursor(attackCursor, Input.CURSOR_ARROW, attackCursorHotspot);
 				foundAsteroid = true;
 		if not(foundAsteroid):
-			Input.set_custom_mouse_cursor(selectCursor, Input.CURSOR_ARROW, selectCursorHotspot);
+			var scrapFound = false;
+			
+			if not(scrapFound):
+				Input.set_custom_mouse_cursor(selectCursor, Input.CURSOR_ARROW, selectCursorHotspot);
 	else:
 		Input.set_custom_mouse_cursor(selectCursor, Input.CURSOR_ARROW, selectCursorHotspot);
 
