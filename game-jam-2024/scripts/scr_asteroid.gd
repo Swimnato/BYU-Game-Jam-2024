@@ -19,10 +19,18 @@ var speed = rng.randf_range(min_speed, max_speed)
 
 @onready var healthBar = $Status_Bars;
 
+@export var textures: Array
+
+@export var scale_variance = 1.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	healthBar.setMaxHealth(maxHP);
 	healthBar.setCoords(Vector2(0, 50));
+	rotation = rng.randf() * 360
+	$Sprite2D.texture = textures[randi() % textures.size()]
+	scale.x += randf() * scale_variance
+	scale.y += randf() * scale_variance
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

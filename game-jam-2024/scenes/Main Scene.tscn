@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://art/temp/Space Background Dev Art.png" id="1_1jorf"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="2_36ttu"]
-[ext_resource type="Texture2D" uid="uid://iqno4701px8i" path="res://art/temp/Planet Dev Art.png" id="3_ggrqu"]
+[ext_resource type="Texture2D" uid="uid://cmduooauniiw7" path="res://art/prod/idleflash.png" id="3_5j06c"]
 [ext_resource type="Script" path="res://scripts/planet_dev_art.gd" id="4_50ck8"]
-[ext_resource type="Texture2D" uid="uid://krt7327yq0br" path="res://art/temp/Main Ship Dev Art.png" id="5_i8m0v"]
+[ext_resource type="Texture2D" uid="uid://cs8408cxdt5o0" path="res://art/prod/betterORCA.png" id="6_2crcs"]
 [ext_resource type="Script" path="res://scripts/main_ship_dev_art.gd" id="6_bitnt"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
@@ -21,7 +21,7 @@ script = ExtResource("2_36ttu")
 [node name="PlanetDevArt" type="Sprite2D" parent="."]
 rotation = -0.00349066
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_ggrqu")
+texture = ExtResource("3_5j06c")
 script = ExtResource("4_50ck8")
 
 [node name="Area2D" type="Area2D" parent="PlanetDevArt"]
@@ -35,8 +35,8 @@ shape = SubResource("CircleShape2D_lqryg")
 [node name="MainShipDevArt" type="Sprite2D" parent="."]
 position = Vector2(-170.307, -185.894)
 rotation = -0.655343
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_i8m0v")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_2crcs")
 script = ExtResource("6_bitnt")
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,18 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://djygfxgldr453"]
+[gd_scene load_steps=7 format=3 uid="uid://djygfxgldr453"]
 
 [ext_resource type="Script" path="res://scripts/scr_asteroid.gd" id="1_t2oit"]
-[ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://art/temp/Asteroid Dev Art.png" id="2_rwmw5"]
+[ext_resource type="Texture2D" uid="uid://3d15veyvsmh" path="res://art/prod/astroid1.png" id="2_oq6qn"]
 [ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="3_6ar10"]
+[ext_resource type="Texture2D" uid="uid://b1wcer4deg1mo" path="res://art/prod/astroid2.png" id="3_er77n"]
+[ext_resource type="Texture2D" uid="uid://bjb6pmob166n2" path="res://art/prod/astroid3.png" id="4_02jim"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7cx7"]
-radius = 118.0
+radius = 390.021
 
 [node name="Asteroid" type="Node2D"]
 script = ExtResource("1_t2oit")
+textures = [ExtResource("2_oq6qn"), ExtResource("3_er77n"), ExtResource("4_02jim")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_rwmw5")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_oq6qn")
 
 [node name="Asteroid_Area" type="Area2D" parent="Sprite2D"]
 
