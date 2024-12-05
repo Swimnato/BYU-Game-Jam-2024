@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3thy6csnhwc2"]
+[gd_scene load_steps=4 format=3 uid="uid://d3thy6csnhwc2"]
 
 [ext_resource type="Script" path="res://scripts/scr_drone.gd" id="1_3dp6e"]
 [ext_resource type="Texture2D" uid="uid://caw7fj0p5fil" path="res://art/drone.png" id="2_1k4ej"]
+[ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="3_3bp6f"]
 
 [node name="Drone" type="Node2D"]
 script = ExtResource("1_3dp6e")
@@ -11,3 +12,5 @@ position = Vector2(1, 2)
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_1k4ej")
+
+[node name="Status_Bars" parent="." instance=ExtResource("3_3bp6f")]

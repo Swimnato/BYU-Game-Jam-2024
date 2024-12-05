@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brny0obmr4vdt"]
+[gd_scene load_steps=12 format=3 uid="uid://brny0obmr4vdt"]
 
 [ext_resource type="Texture2D" uid="uid://dqqpesl4dblg6" path="res://art/temp/Space Background Dev Art.png" id="1_1jorf"]
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="2_36ttu"]
@@ -6,8 +6,6 @@
 [ext_resource type="Script" path="res://scripts/planet_dev_art.gd" id="4_50ck8"]
 [ext_resource type="Texture2D" uid="uid://krt7327yq0br" path="res://art/temp/Main Ship Dev Art.png" id="5_i8m0v"]
 [ext_resource type="Script" path="res://scripts/main_ship_dev_art.gd" id="6_bitnt"]
-[ext_resource type="Texture2D" uid="uid://b6uc0fa4ryuis" path="res://art/temp/Asteroid Dev Art.png" id="8_gwdi6"]
-[ext_resource type="Script" path="res://scripts/Asteroid_Main.gd" id="9_bklsd"]
 [ext_resource type="Script" path="res://scripts/selection.gd" id="10_yx8jt"]
 [ext_resource type="Script" path="res://scripts/scr_drone_controller.gd" id="11_dnc7g"]
 [ext_resource type="PackedScene" uid="uid://o5hy3ktnw1c1" path="res://scenes/Status_Bars.tscn" id="11_o44ox"]
@@ -32,20 +30,14 @@ script = ExtResource("4_50ck8")
 scale = Vector2(30, 30)
 shape = SubResource("CircleShape2D_lqryg")
 
+[node name="Status_Bars" parent="PlanetDevArt" instance=ExtResource("11_o44ox")]
+
 [node name="MainShipDevArt" type="Sprite2D" parent="."]
 position = Vector2(-170.307, -185.894)
 rotation = -0.655343
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_i8m0v")
 script = ExtResource("6_bitnt")
-
-[node name="Asteroid" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-748.801, -259.703)
-rotation = -0.000753172
-scale = Vector2(-0.23, -0.23)
-texture = ExtResource("8_gwdi6")
-script = ExtResource("9_bklsd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -55,9 +47,6 @@ script = ExtResource("10_yx8jt")
 [node name="droneController" type="Node2D" parent="."]
 script = ExtResource("11_dnc7g")
 starting_drone_count = 10
-
-[node name="StatusBars" parent="." instance=ExtResource("11_o44ox")]
-currentHealth = 66
 
 [node name="asteroidController" type="Node2D" parent="."]
 script = ExtResource("12_rr4w4")

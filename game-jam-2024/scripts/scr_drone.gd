@@ -16,6 +16,8 @@ var current_state = states.ORBIT_LOWER
 @export var attackDistance = 150;
 @export var movementSpeed = 200;
 
+@onready var statusBar = $Status_Bars;
+
 var orbit_angle = 0
 var selected = false;
 
@@ -24,17 +26,28 @@ var asteroids: Array;
 
 var sentryCoords;
 
+@export var maxEnergy = 100;
+@export var rechargeRate = 20;
+var energy = 30;
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	statusBar.setMainColor(Color.AQUA);
+	statusBar.setBkgColor(Color.DARK_SLATE_BLUE);
+	statusBar.setCoords(Vector2(-50,0));
+	statusBar.rotate90();
+	statusBar.setMaxHealth(maxEnergy);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.1
 func _process(delta: float) -> void:
+	statusBar.setCurrentHealth(energy);
 	queue_redraw();
 	match current_state:
 		states.ORBIT_LOWER:
 			move_orbit(lower_orbit_radius, delta)
+			energy += delta * rechargeRate;
 		states.ORBIT_UPPER:
 			move_orbit(upper_orbit_radius, delta)
 		states.ATTACK:
