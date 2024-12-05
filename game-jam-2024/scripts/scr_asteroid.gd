@@ -23,6 +23,8 @@ var speed = rng.randf_range(min_speed, max_speed)
 
 @export var scale_variance = 1.0
 
+var mouse_is_over = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	healthBar.setMaxHealth(maxHP);
@@ -45,3 +47,12 @@ func damage(amount: int = 10):
 
 func move(delta: float) -> void:
 	position += angle * speed * delta * 60
+	
+
+
+func _on_asteroid_area_mouse_entered() -> void:
+	mouse_is_over = true
+
+
+func _on_asteroid_area_mouse_exited() -> void:
+	mouse_is_over = false

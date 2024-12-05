@@ -7,10 +7,13 @@ extends Node2D
 var asteroids: Array
 
 var rng = RandomNumberGenerator.new()
+@onready var timer = $asteroidTimer
+
+@onready var selection = $"../Selection"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,3 +27,6 @@ func _on_asteroid_timer_timeout() -> void:
 	asteroid.position = Vector2(x, y)
 	asteroids.append(asteroid);
 	add_child(asteroid)
+	if timer.wait_time > 0.5:
+		timer.wait_time *= 0.98
+	timer.start()

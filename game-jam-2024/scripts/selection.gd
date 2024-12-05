@@ -71,7 +71,7 @@ func isOnOrbit(coords: Vector2, radius):
 			
 func isOverAsteroid(coords: Vector2):
 	for asteroid in asteroids:
-		if(abs(asteroid.position.x - coords.x) <= asteroidSize.x / 2 and abs(asteroid.position.y - coords.y) <= asteroidSize.y / 2):
+		if asteroid.mouse_is_over:
 			selectedItem = asteroid;
 			return true;
 

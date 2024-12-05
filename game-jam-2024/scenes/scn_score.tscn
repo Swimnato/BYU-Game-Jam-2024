@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cotkl6hk3p0wj"]
+
+[ext_resource type="Script" path="res://scripts/scr_score.gd" id="1_0ht2t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q3ev6"]
+font_size = 60
+
+[node name="ScnScore" type="Node2D"]
+script = ExtResource("1_0ht2t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 22.0
+offset_top = 3.0
+offset_right = 287.0
+offset_bottom = 86.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_q3ev6")
