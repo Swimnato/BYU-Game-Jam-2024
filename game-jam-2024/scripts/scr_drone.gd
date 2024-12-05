@@ -22,7 +22,7 @@ var orbit_angle = 0
 var selected = false;
 
 var targetedObject;
-var asteroids: Array;
+@onready var asteroids: Array = get_parent().asteroids;
 
 var inRangeOfAteroid = false;
 
@@ -30,6 +30,8 @@ var sentryCoords;
 
 @export var attackDamage = 10;
 @export var attackRate = 500;
+@export var laserColor = Color.BLUE_VIOLET;
+@export var agroRange = 250;
 var lastAttack = 0;
 
 @export var maxEnergy = 100;
@@ -61,6 +63,7 @@ func _process(delta: float) -> void:
 			states.ORBIT_UPPER:
 				inRangeOfAteroid = false
 				move_orbit(upper_orbit_radius, delta)
+				targetNearbyAsteroids()
 			states.ATTACK:
 				if(asteroids.has(targetedObject)):
 					moveToObject(delta);
@@ -73,6 +76,7 @@ func _process(delta: float) -> void:
 				inRangeOfAteroid = false
 				moveToObject(delta, true);
 			states.SENTRY:
+				targetNearbyAsteroids();
 				inRangeOfAteroid = false
 				moveToCoords(delta, sentryCoords);
 	
@@ -81,23 +85,32 @@ func _process(delta: float) -> void:
 	if(energy < 0):
 		energy = 0;
 		
+
+func targetNearbyAsteroids():
+	for asteroid in asteroids:
+		var distance = (asteroid.position - position).length();
+		if(distance <= agroRange):
+			attackAsteroid(asteroid);
+
 func damageAsteroid(delta):
 	lastAttack += delta * 1000;
 	if(lastAttack >= attackRate):
 		targetedObject.damage(attackDamage);
 		lastAttack = 0;
+		energy -= attackEnergy;
 			
 func moveToCoords(delta, coords: Vector2):
 	var distx = coords.x - position.x;
 	var disty = coords.y - position.y;
 	var total_distance = (distx**2 + disty**2)**.5;
+	var theta = atan2(disty,distx);
+	rotation = theta
 	if(total_distance < movementSpeed * delta):
 		position.x = coords.x;
 		position.y = coords.y;
 		energy += delta * dischargeRate * total_distance / movementSpeed;
 	else:
-		var theta = atan2(disty,distx);
-		rotation = theta
+		
 		position += movementSpeed * Vector2(cos(theta), sin(theta)) * delta
 		energy -= delta * dischargeRate
 
@@ -107,14 +120,17 @@ func moveToObject(delta, touchingObject: bool = false):
 	var disty = targetedObject.position.y - position.y
 	var total_distance = (distx**2 + disty**2)**.5;
 	var desiredDistance = attackDistance;
-	if(total_distance >= desiredDistance):
+	var theta = atan2(disty,distx);
+	rotation = theta
+	if(total_distance > desiredDistance):
 		inRangeOfAteroid = false;
-		var theta = atan2(disty,distx);
-		rotation = theta
 		position += movementSpeed * Vector2(cos(theta), sin(theta)) * delta
 		energy -= delta * dischargeRate
 	else:
 		inRangeOfAteroid = true;
+		if(total_distance < desiredDistance - 10):
+			position -= movementSpeed * Vector2(cos(theta), sin(theta)) * delta
+			energy -= delta * dischargeRate
 		
 
 #handle instruction state change
@@ -142,7 +158,6 @@ func standSentry(coords: Vector2):
 func attackAsteroid(asteroid):
 	targetedObject = asteroid;
 	current_state = states.ATTACK;
-	asteroids = asteroid.get_parent().asteroids;
 
 func collectResource(resource):
 	targetedObject = resource;
@@ -151,3 +166,9 @@ func collectResource(resource):
 func _draw() -> void:
 	if selected:
 		draw_rect(Rect2(-selectionBoxSize / 2.0, selectionBoxSize), selecitonBoxColor, true);
+	if inRangeOfAteroid and targetedObject != null:
+		if(lastAttack >= attackRate / 3 * 2):
+			var distx = targetedObject.position.x - position.x
+			var disty = targetedObject.position.y - position.y
+			var total_distance = (distx**2 + disty**2)**.5;
+			draw_rect(Rect2(Vector2(30, -5), Vector2(total_distance, 10)), laserColor, true);
